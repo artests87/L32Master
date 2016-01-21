@@ -1,15 +1,16 @@
-package com.example.artests.l32master;
+package ru.alexanderklimov.aboutcats;
 
-import android.app.Activity;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.artests.l32master.dummy.DummyContent;
+
+import ru.alexanderklimov.aboutcats.dummy.DummyContent;
 
 /**
  * A fragment representing a single Cat detail screen.
@@ -45,23 +46,19 @@ public class CatDetailFragment extends Fragment {
             // arguments. In a real-world scenario, use a Loader
             // to load content from a content provider.
             mItem = DummyContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
-
-            Activity activity = this.getActivity();
-            CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
-            if (appBarLayout != null) {
-                appBarLayout.setTitle(mItem.content);
-            }
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.cat_detail, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_cat_detail, container, false);
 
         // Show the dummy content as text in a TextView.
         if (mItem != null) {
-            ((TextView) rootView.findViewById(R.id.cat_detail)).setText(mItem.details);
+            //((TextView) rootView.findViewById(R.id.cat_detail)).setText(mItem.content);
+            //((ImageView) rootView.findViewById(R.id.imageviewCat)).setImageResource(mItem.resourceId);
+            ((WebView) rootView.findViewById(R.id.webView)).loadUrl(mItem.website_url);
         }
 
         return rootView;
